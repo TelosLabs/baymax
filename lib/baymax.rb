@@ -6,6 +6,10 @@ require 'baymax/adapters/base'
 require 'baymax/adapters/appsignal'
 require 'baymax/adapters/rollbar'
 require 'baymax/filter_engine'
+require 'baymax/security_scanner'
+require 'baymax/context_gatherer'
+require 'baymax/triage'
+require 'baymax/decision_engine'
 
 module Baymax
 end
