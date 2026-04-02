@@ -1,0 +1,10 @@
+{
+  "source": "rollbar",
+  "error_class": "ActiveRecord::RecordNotFound",
+  "error_message": "Couldn't find User with id=999",
+  "severity": "error",
+  "occurrence_count": 5,
+  "revision": "def789abc012",
+  "app_name": "astro-production",
+  "incident_id": "67890"
+}

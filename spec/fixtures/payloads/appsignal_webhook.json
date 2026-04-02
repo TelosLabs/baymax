@@ -1,0 +1,10 @@
+{
+  "source": "appsignal",
+  "error_class": "NoMethodError",
+  "error_message": "undefined method 'foo' for nil:NilClass",
+  "severity": "error",
+  "occurrence_count": 42,
+  "revision": "abc123def456",
+  "app_name": "astro-production",
+  "incident_id": "12345"
+}
