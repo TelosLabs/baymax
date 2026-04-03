@@ -1,6 +1,79 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'optparse'
+require 'json'
 require 'baymax'
 
-puts "Baymax v#{Baymax::VERSION}"
+options = {
+  config_path: 'config/baymax_settings.yml',
+  prompt_path: nil,
+  dry_run: false,
+  skip_llm: false,
+  fixture: nil,
+  event: nil,
+  pr: nil,
+  mode: 'triage'
+}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: baymax <mode> [options]\nModes: triage, verify"
+
+  opts.on('--config PATH', 'Path to baymax settings YAML') { |v| options[:config_path] = v }
+  opts.on('--prompt PATH', 'Path to triage prompt markdown') { |v| options[:prompt_path] = v }
+  opts.on('--dry-run', 'Run pipeline without GitHub API calls') { options[:dry_run] = true }
+  opts.on('--skip-llm', 'Skip LLM triage, use filter-only data') { options[:skip_llm] = true }
+  opts.on('--fixture NAME', 'Use built-in fixture payload (appsignal, rollbar)') { |v| options[:fixture] = v }
+  opts.on('--event PATH', 'Path to JSON event payload file') { |v| options[:event] = v }
+  opts.on('--pr NUMBER', Integer, 'PR number to verify') { |v| options[:pr] = v }
+end.parse!
+
+options[:mode] = ARGV.shift || 'triage'
+
+config = Telos::AgentToolkit::Config.load(options[:config_path])
+
+case options[:mode]
+when 'triage'
+  payload = if options[:fixture]
+              fixture_path = File.expand_path("../../spec/fixtures/payloads/#{options[:fixture]}_webhook.json", __dir__)
+              unless File.exist?(fixture_path)
+                gem_dir = Gem.loaded_specs['baymax']&.gem_dir || '.'
+                fixture_path = File.join(gem_dir, "spec/fixtures/payloads/#{options[:fixture]}_webhook.json")
+              end
+              abort "Fixture not found: #{options[:fixture]}" unless File.exist?(fixture_path)
+              JSON.parse(File.read(fixture_path))
+            elsif options[:event]
+              JSON.parse(File.read(options[:event]))
+            else
+              event_path = ENV.fetch('GITHUB_EVENT_PATH', nil)
+              abort 'No event source. Use --fixture, --event, or run in GitHub Actions.' unless event_path
+              event = JSON.parse(File.read(event_path))
+              event['client_payload'] || event
+            end
+
+  summary = Baymax::Analyzer.new(config, prompt_path: options[:prompt_path]).run(
+    event_payload: payload,
+    dry_run: options[:dry_run],
+    skip_llm: options[:skip_llm]
+  )
+
+  puts JSON.pretty_generate(summary)
+  exit_code = if summary[:status] == :error then 1
+              elsif summary[:status] == :filtered then 2
+              else 0
+              end
+  exit(exit_code)
+
+when 'verify'
+  abort '--pr is required for verify mode' unless options[:pr]
+
+  verifier = Telos::AgentToolkit::PrVerifier.new(
+    config, pr_number: options[:pr], dry_run: options[:dry_run]
+  )
+  result = verifier.run
+  puts JSON.pretty_generate(result)
+  exit(result[:status] == :completed ? 0 : 1)
+
+else
+  abort "Unknown mode: #{options[:mode]}. Use 'triage' or 'verify'."
+end

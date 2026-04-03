@@ -10,6 +10,7 @@ require 'baymax/security_scanner'
 require 'baymax/context_gatherer'
 require 'baymax/triage'
 require 'baymax/decision_engine'
+require 'baymax/analyzer'
 
 module Baymax
 end
