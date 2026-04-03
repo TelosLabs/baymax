@@ -9,5 +9,6 @@ gem 'telos-agent-toolkit', github: 'TelosLabs/telos-agent-toolkit', ref: '8e8b9b
 group :development, :test do
   gem 'rspec', '~> 3.0'
   gem 'rubocop-harness', github: 'TelosLabs/rubocop-harness'
+  gem 'rubocop-rspec', require: false
   gem 'webmock', '~> 3.0'
 end
