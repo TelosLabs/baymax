@@ -1,0 +1,35 @@
+# Baymax Production Alert Triage Configuration
+# See: https://github.com/TelosLabs/baymax
+
+llm:
+  provider: anthropic
+  model: claude-sonnet-4-5-20250514
+  max_tokens: 4096
+  temperature: 0.2
+  retry_attempts: 3
+  retry_base_delay_seconds: 1.0
+
+github:
+  repo: YourOrg/YourRepo
+  issue_prefix: "[baymax]"
+  labels:
+    - name: baymax
+      color: "0ea5e9"
+
+filter:
+  min_severity: warning
+  min_occurrences: 3
+  ignored_error_classes:
+    - SignalException
+    - SystemExit
+    - Interrupt
+
+decision:
+  confidence_threshold: 0.7
+
+triage:
+  max_triage_per_hour: 10
+
+auto_assign:
+  agent: claude
+  token_env: AGENT_ASSIGN_TOKEN
