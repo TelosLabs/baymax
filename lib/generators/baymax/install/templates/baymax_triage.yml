@@ -5,7 +5,9 @@ on:
 
 concurrency:
   group: baymax-triage
-  cancel-in-progress: false  # Queue, don't drop alerts
+  # GitHub Actions queues at most 1 pending run; additional dispatches
+  # during an active run will replace the pending one (not unbounded queue).
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -14,11 +16,12 @@ permissions:
 jobs:
   triage:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 50
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -30,10 +33,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          APPSIGNAL_API_KEY: ${{ secrets.APPSIGNAL_API_KEY }}
-          ROLLBAR_API_TOKEN: ${{ secrets.ROLLBAR_API_TOKEN }}
           AGENT_ASSIGN_TOKEN: ${{ secrets.AGENT_ASSIGN_TOKEN }}
         run: |
           bundle exec baymax triage \
             --config config/baymax_settings.yml \
             --prompt .github/prompts/baymax_triage.md
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Baymax triage failed. Production alerts may be going unprocessed."
