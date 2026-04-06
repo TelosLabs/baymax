@@ -45,7 +45,7 @@ RSpec.describe "Baymax::Generators::InstallGenerator" do
 
     it "sets a confidence threshold" do
       config = YAML.safe_load(content)
-      expect(config.dig("decision", "confidence_threshold")).to eq(0.7)
+      expect(config.dig("decision", "confidence_threshold")).to eq(0.8)
     end
   end
 

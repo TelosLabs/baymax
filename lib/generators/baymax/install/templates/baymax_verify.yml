@@ -12,6 +12,7 @@ jobs:
   verify:
     if: contains(github.event.pull_request.labels.*.name, 'baymax-fix')
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,7 +29,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           bundle exec baymax verify \
-            --pr ${{ github.event.pull_request.number }} \
+            --pr "$PR_NUMBER" \
             --config config/baymax_settings.yml
