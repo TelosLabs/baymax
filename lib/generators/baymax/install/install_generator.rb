@@ -65,24 +65,48 @@ module Baymax
 
       def print_infrastructure_steps
         say '  1. Deploy telos-webhook-proxy to Cloudflare Workers'
-        say '  2. Configure AppSignal/Rollbar webhooks to point at proxy URL'
+        say '  2. Add Cloudflare Worker secrets:'
+        print_worker_secrets
+        say '  3. Configure AppSignal/Rollbar webhooks to point at proxy URL'
         say '     Example: https://your-proxy.workers.dev/?repo=YourOrg/YourRepo'
-        say '  3. Add GitHub Actions secrets:'
-        print_secrets_list
+        say '  4. Create GitHub fine-grained personal access tokens:'
+        print_token_instructions
+        say '  5. Add GitHub Actions secrets:'
+        print_actions_secrets
       end
 
-      def print_secrets_list
+      def print_worker_secrets
+        say '     - GITHUB_TOKEN (fine-grained PAT, see step 4)'
+        say '     - APPSIGNAL_WEBHOOK_SECRET (from AppSignal webhook config)'
+        say '     - ROLLBAR_WEBHOOK_SECRET (from Rollbar webhook config, if applicable)'
+      end
+
+      def print_token_instructions
+        say ''
+        say '     a) Webhook proxy token (for Cloudflare Worker GITHUB_TOKEN):'
+        say '        - Repository access: your target repo'
+        say '        - Contents: Read and write (required for repository_dispatch)'
+        say ''
+        say '     b) Agent dispatch token (for AGENT_ASSIGN_TOKEN secret):'
+        say '        - Repository access: your target repo'
+        say '        - Contents: Read and write (to create branches and push)'
+        say '        - Issues: Read and write (to comment on issues)'
+        say '        - Pull requests: Read and write (to create PRs)'
+        say ''
+      end
+
+      def print_actions_secrets
         say '     - ANTHROPIC_API_KEY (for LLM triage)'
         say '     - APPSIGNAL_API_KEY (if using AppSignal full details)'
         say '     - ROLLBAR_API_TOKEN (if using Rollbar full details)'
-        say '     - AGENT_ASSIGN_TOKEN (optional, falls back to GITHUB_TOKEN)'
+        say '     - AGENT_ASSIGN_TOKEN (fine-grained PAT from step 4b)'
       end
 
       def print_configuration_steps
-        say '  4. Review config/baymax_settings.yml and adjust thresholds'
-        say '  5. Update .github/workflows/claude.yml permissions:'
-        say '     contents: write, pull-requests: write'
-        say '  6. Test locally:'
+        say '  6. Review config/baymax_settings.yml and adjust thresholds'
+        say '  7. Update .github/workflows/claude.yml permissions:'
+        say '     contents: write, pull-requests: write, issues: write'
+        say '  8. Test locally:'
         say '     bundle exec baymax triage --fixture appsignal --dry-run --skip-llm'
       end
     end
