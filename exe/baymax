@@ -58,10 +58,7 @@ when 'triage'
   )
 
   puts JSON.pretty_generate(summary)
-  exit_code = if summary[:status] == :error then 1
-              elsif summary[:status] == :filtered then 2
-              else 0
-              end
+  exit_code = summary[:status] == :error ? 1 : 0
   exit(exit_code)
 
 when 'verify'
