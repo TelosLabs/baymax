@@ -1,5 +1,11 @@
 # Baymax
 
+<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3kydXZqbHVhMjhicGVyNHg0NnBzanAyb2kxZzZ2ajJ5Y2x1eHRhaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12gfLtKCd4Mz0A/giphy.gif" alt="Baymax waving" width="200">
+
+> *"I am Baymax, your personal healthcare companion."*
+
+Named after the inflatable healthcare robot from **Big Hero 6** — because just like the original, this Baymax detects when something is wrong, diagnoses the problem, and helps fix it. Except instead of scraped knees, it's production errors.
+
 Production alert triage agent for Rails applications. Receives error alerts from AppSignal and Rollbar, triages them with an LLM, creates GitHub issues with structured diagnoses, and dispatches AI agents for auto-fixes.
 
 ## How It Works
