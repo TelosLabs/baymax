@@ -3,7 +3,7 @@
 
 llm:
   provider: anthropic
-  model: claude-sonnet-4-5-20250514
+  # model: defaults to toolkit's built-in (currently claude-sonnet-4-6)
   max_tokens: 4096
   temperature: 0.2
   retry_attempts: 3

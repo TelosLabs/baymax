@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Baymax::Analyzer do
   let(:config) do
     Telos::AgentToolkit::Config.new({
-      'llm' => { 'provider' => 'anthropic', 'model' => 'claude-sonnet-4-5-20250514' },
+      'llm' => { 'provider' => 'anthropic', 'model' => 'claude-sonnet-4-6' },
       'github' => { 'repo' => 'TelosLabs/astro' },
       'filter' => { 'min_severity' => 'error', 'min_occurrences' => 1 },
       'decision' => { 'confidence_threshold' => 0.7 },

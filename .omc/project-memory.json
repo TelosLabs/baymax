@@ -1,0 +1,220 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775662036511,
+  "projectRoot": "/Users/alicia/Telos/baymax",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Ruby",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "Gemfile"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "bundler",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "lib",
+      "spec"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "exe": {
+      "path": "exe",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775662036502,
+      "keyFiles": [
+        "baymax"
+      ]
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 1,
+      "lastAccessed": 1775662036503,
+      "keyFiles": [
+        "baymax.rb"
+      ]
+    },
+    "spec": {
+      "path": "spec",
+      "purpose": "Test specifications",
+      "fileCount": 1,
+      "lastAccessed": 1775662036503,
+      "keyFiles": [
+        "spec_helper.rb"
+      ]
+    },
+    "spec/fixtures": {
+      "path": "spec/fixtures",
+      "purpose": "Test fixtures",
+      "fileCount": 0,
+      "lastAccessed": 1775662036504,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "README.md",
+      "accessCount": 2,
+      "lastAccessed": 1775662965151,
+      "type": "file"
+    },
+    {
+      "path": "lib/generators/baymax/install/install_generator.rb",
+      "accessCount": 2,
+      "lastAccessed": 1775662970048,
+      "type": "file"
+    },
+    {
+      "path": "lib/generators/baymax/install/templates/baymax_settings.yml",
+      "accessCount": 2,
+      "lastAccessed": 1775662970505,
+      "type": "file"
+    },
+    {
+      "path": "lib/generators/baymax/install/templates/baymax_triage.yml",
+      "accessCount": 2,
+      "lastAccessed": 1775662971003,
+      "type": "file"
+    },
+    {
+      "path": "lib/generators/baymax/install/templates/baymax_verify.yml",
+      "accessCount": 2,
+      "lastAccessed": 1775662971208,
+      "type": "file"
+    },
+    {
+      "path": "baymax.gemspec",
+      "accessCount": 2,
+      "lastAccessed": 1775662975312,
+      "type": "file"
+    },
+    {
+      "path": "lib/generators/baymax/install/templates/baymax_triage.md",
+      "accessCount": 2,
+      "lastAccessed": 1775662975562,
+      "type": "file"
+    },
+    {
+      "path": "lib/generators/baymax/install/templates/baymax_fix_instructions.md",
+      "accessCount": 2,
+      "lastAccessed": 1775662975989,
+      "type": "file"
+    },
+    {
+      "path": "lib/generators/baymax/install/templates/baymax_diagnosis.md",
+      "accessCount": 2,
+      "lastAccessed": 1775662976586,
+      "type": "file"
+    },
+    {
+      "path": "exe/baymax",
+      "accessCount": 2,
+      "lastAccessed": 1775662977060,
+      "type": "file"
+    },
+    {
+      "path": "Gemfile",
+      "accessCount": 1,
+      "lastAccessed": 1775662889507,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662892497,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/version.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662892537,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/analyzer.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662894755,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/triage.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662895234,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/filter_engine.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662895331,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/decision_engine.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662895449,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/adapters/base.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662897871,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/context_gatherer.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662897960,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/security_scanner.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662898155,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/analyzer/pipeline_steps.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662898360,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/adapters/appsignal.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662900581,
+      "type": "file"
+    },
+    {
+      "path": "lib/baymax/adapters/rollbar.rb",
+      "accessCount": 1,
+      "lastAccessed": 1775662900790,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

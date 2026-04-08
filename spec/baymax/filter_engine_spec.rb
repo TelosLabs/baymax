@@ -5,7 +5,7 @@ require "spec_helper"
 RSpec.describe Baymax::FilterEngine do
   let(:config) do
     Telos::AgentToolkit::Config.new({
-      "llm" => { "provider" => "anthropic", "model" => "claude-sonnet-4-5-20250514" },
+      "llm" => { "provider" => "anthropic", "model" => "claude-sonnet-4-6" },
       "github" => { "repo" => "TelosLabs/astro" },
       "filter" => { "min_severity" => "warning", "min_occurrences" => 5, "ignored_error_classes" => ["SignalException"] }
     })
