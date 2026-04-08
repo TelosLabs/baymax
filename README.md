@@ -1,7 +1,6 @@
 # Baymax
 
-<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3kydXZqbHVhMjhicGVyNHg0NnBzanAyb2kxZzZ2ajJ5Y2x1eHRhaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12gfLtKCd4Mz0A/giphy.gif" alt="Baymax waving" width="200">
-
+![Baymax Gif](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGdnZzkxOGY5eHJ6ZDIwa2VmaXc5NjRqam43ZnliNDIzcm90cGk4dCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/52AimBOEZ5mgw/giphy.gif)
 > *"I am Baymax, your personal healthcare companion."*
 
 Named after the inflatable healthcare robot from **Big Hero 6** — because just like the original, this Baymax detects when something is wrong, diagnoses the problem, and helps fix it. Except instead of scraped knees, it's production errors.
