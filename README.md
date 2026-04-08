@@ -214,6 +214,24 @@ Edit `.github/prompts/baymax_fix_instructions.md` to change the constraints give
 
 In `config/baymax_settings.yml`, you can ignore specific error classes, set minimum severity and occurrence thresholds, and control the triage rate limit.
 
+## Multi-project setup
+
+Multiple projects can share a single Cloudflare Worker proxy. Each project just uses a different `repo` param in its webhook URL:
+
+```
+https://your-proxy.workers.dev/?repo=TelosLabs/astro
+https://your-proxy.workers.dev/?repo=TelosLabs/other-app
+```
+
+To add a new project:
+
+1. Edit the existing webhook proxy fine-grained PAT to include the new repo in its repository access list — no new token needed
+2. Configure the error monitoring webhook for the new project, pointing to the same proxy URL with the appropriate `?repo=` param
+3. Run `rails generate baymax:install` in the new project
+4. Add the GitHub Actions secrets (`ANTHROPIC_API_KEY`, `AGENT_ASSIGN_TOKEN`) to the new repo
+
+The agent dispatch token (`AGENT_ASSIGN_TOKEN`) is per-repo, so each project needs its own — or you can use a single PAT with access to all target repos.
+
 ## License
 
 Available as open source under the [MIT License](LICENSE.txt).
